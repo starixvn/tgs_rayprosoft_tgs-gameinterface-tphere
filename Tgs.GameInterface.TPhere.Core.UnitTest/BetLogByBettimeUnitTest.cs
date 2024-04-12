@@ -105,7 +105,7 @@ public class BetLogByBettimeUnitTest
 			}
 		};
 		var handler = new MockHttpMessageHandler();
-		_ = handler.Expect(HttpMethod.Get, builder.ToString())
+		_ = handler.Expect(HttpMethod.Get, "/api/betlog-by-bettime")
 				.WithHeaders("Authorization", apiToken)
 				.Respond(HttpStatusCode.OK, JsonContent.Create(response));
 
@@ -242,7 +242,7 @@ public class BetLogByBettimeUnitTest
 			}
 		};
 		var handler = new MockHttpMessageHandler();
-		_ = handler.Expect(HttpMethod.Get, builder.ToString())
+		_ = handler.Expect(HttpMethod.Get, "/api/betlog-by-bettime")
 				.WithHeaders("Authorization", apiToken)
 				.Respond(HttpStatusCode.OK, JsonContent.Create(response));
 
@@ -379,7 +379,7 @@ public class BetLogByBettimeUnitTest
 			}
 		};
 		var handler = new MockHttpMessageHandler();
-		_ = handler.Expect(HttpMethod.Get, builder.ToString())
+		_ = handler.Expect(HttpMethod.Get, "/api/betlog-by-bettime")
 				.WithHeaders("Authorization", apiToken)
 				.Respond(HttpStatusCode.OK, JsonContent.Create(response));
 
@@ -520,7 +520,7 @@ public class BetLogByBettimeUnitTest
 			}
 		};
 		var handler = new MockHttpMessageHandler();
-		_ = handler.Expect(HttpMethod.Get, builder.ToString())
+		_ = handler.Expect(HttpMethod.Get, "/api/betlog-by-bettime")
 				.WithHeaders("Authorization", apiToken)
 				.Respond(HttpStatusCode.OK, JsonContent.Create(response));
 
@@ -661,7 +661,7 @@ public class BetLogByBettimeUnitTest
 			}
 		};
 		var handler = new MockHttpMessageHandler();
-		_ = handler.Expect(HttpMethod.Get, builder.ToString())
+		_ = handler.Expect(HttpMethod.Get, "/api/betlog-by-bettime")
 				.WithHeaders("Authorization", apiToken)
 				.Respond(HttpStatusCode.OK, JsonContent.Create(response));
 
