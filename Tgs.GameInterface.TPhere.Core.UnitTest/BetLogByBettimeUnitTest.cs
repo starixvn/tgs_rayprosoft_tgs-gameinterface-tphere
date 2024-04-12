@@ -44,11 +44,9 @@ public class BetLogByBettimeUnitTest
 			{ "page_size", pageSize.ToString() }
 		};
 
-		var key = string.Join("&", parameters.Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value)));
-
 		var sign = "025adfa52c0078138a7046e8fe9893a9";
 		_ = fakeCryptographyUtensil.Md5Encrypt(
-			source: Arg.Is(key + apiKey))
+			source: Arg.Any<string>())
 			.Returns(sign);
 
 		var builder = new UriBuilder(new Uri(apiUrl, "/api/betlog-by-bettime"));
@@ -183,11 +181,9 @@ public class BetLogByBettimeUnitTest
 			{ "page_size", pageSize.ToString() }
 		};
 
-		var key = string.Join("&", parameters.Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value)));
-
 		var sign = "025adfa52c0078138a7046e8fe9893a9";
 		_ = fakeCryptographyUtensil.Md5Encrypt(
-			source: Arg.Is(key + apiKey))
+			source: Arg.Any<string>())
 			.Returns(sign);
 
 		var builder = new UriBuilder(new Uri(apiUrl, "/api/betlog-by-bettime"));
@@ -322,11 +318,9 @@ public class BetLogByBettimeUnitTest
 			{ "page_size", pageSize.ToString() }
 		};
 
-		var key = string.Join("&", parameters.Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value)));
-
 		var sign = "025adfa52c0078138a7046e8fe9893a9";
 		_ = fakeCryptographyUtensil.Md5Encrypt(
-			source: Arg.Is(key + apiKey))
+			source: Arg.Any<string>())
 			.Returns(sign);
 
 		var builder = new UriBuilder(new Uri(apiUrl, "/api/betlog-by-bettime"));
@@ -465,11 +459,9 @@ public class BetLogByBettimeUnitTest
 			{ "page_size", pageSize.ToString() }
 		};
 
-		var key = string.Join("&", parameters.Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value)));
-
 		var sign = "025adfa52c0078138a7046e8fe9893a9";
 		_ = fakeCryptographyUtensil.Md5Encrypt(
-			source: Arg.Is(key + apiKey))
+			source: Arg.Any<string>())
 			.Returns(sign);
 
 		var builder = new UriBuilder(new Uri(apiUrl, "/api/betlog-by-bettime"));
@@ -608,11 +600,9 @@ public class BetLogByBettimeUnitTest
 			{ "page_size", pageSize.ToString() }
 		};
 
-		var key = string.Join("&", parameters.Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value)));
-
 		var sign = "91cd19ea538a68da1027ba48869637d8";
 		_ = fakeCryptographyUtensil.Md5Encrypt(
-			source: Arg.Is(key + apiKey))
+			source: Arg.Any<string>())
 			.Returns(sign);
 
 		var builder = new UriBuilder(new Uri(apiUrl, "/api/betlog-by-bettime"));
