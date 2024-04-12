@@ -2,7 +2,7 @@
 
 namespace Tgs.GameInterface.TPhere.Client;
 
-public interface IGameInterfaceFunkyClient
+public interface IGameInterfaceTPhereClient
 {
 	ValueTask<string> CheckingServiceAsync(string machineName, CancellationToken cancellationToken = default);
 	ValueTask<bool> FundStatusAsync(Uri apiUrl, string apiKey, string apiToken, string orderId, CancellationToken cancellationToken = default);

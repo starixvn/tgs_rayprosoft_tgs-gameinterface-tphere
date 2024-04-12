@@ -1,6 +1,6 @@
 ﻿namespace Tgs.GameInterface.TPhere.Client;
 
-public class GameInterfaceFunkyClientOptions
+public class GameInterfaceTPhereClientOptions
 {
 	public Uri BaseUrl { get; set; } = default!;
 }

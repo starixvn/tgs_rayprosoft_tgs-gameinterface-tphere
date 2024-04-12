@@ -3,8 +3,8 @@ using Google.Protobuf.WellKnownTypes;
 using Tgs.GameInterface.TPhere.Protos;
 
 namespace Tgs.GameInterface.TPhere.Client;
-internal class GameInterfaceFunkyClient(
-	GameInterfaceTPhere.GameInterfaceTPhereClient client) : IGameInterfaceFunkyClient
+internal class GameInterfaceTPhereClient(
+	GameInterfaceTPhere.GameInterfaceTPhereClient client) : IGameInterfaceTPhereClient
 {
 	public async ValueTask<string> CheckingServiceAsync(string machineName, CancellationToken cancellationToken = default)
 	{
