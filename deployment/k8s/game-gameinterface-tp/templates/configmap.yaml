@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-{{ include "game-gameinterface-tp.fullname" . }}
+  labels:
+    {{- include "game-gameinterface-tp.labels" . | nindent 4 }}
+data:
+  appsettings.json: |
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Warning",
+          "Microsoft.AspNetCore": "Warning",
+          "Tgs.GameInterface.Funky.Core": "Information"
+        }
+      },
+      "Kestrel": {
+        "EndpointDefaults": {
+          "Protocols": "Http2"
+        },
+        "Endpoints": {
+          "Http": {
+            "Url": "http://*:{{ .Values.service.targetPort }}",
+            "Protocols": "Http1"
+          },
+          "Grpc": {
+            "Url": "http://*:{{ .Values.service.grpc.targetPort }}",
+            "Protocols": "Http2"
+          }
+        }
+      }
+    }
+  otel-collector-config.yaml: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+
+    processors:
+      batch:
+
+    exporters:
+      otlp:
+        endpoint: "$NODE_IP:4317"
+        tls:
+          insecure: true
+      prometheus:
+        endpoint: "0.0.0.0:8889"
+        namespace: "tgs"
+
+    extensions:
+      health_check:
+        endpoint: 0.0.0.0:13133
+
+    service:
+      extensions: [health_check]
+      pipelines:
+        traces: 
+          receivers: [otlp]
+          processors:
+            - batch
+          exporters: [otlp]
+        metrics:
+          receivers: [otlp]
+          exporters: [prometheus]

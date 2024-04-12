@@ -1,0 +1,21 @@
+﻿namespace Tgs.GameInterface.TPhere.Core.Models;
+public record BetLogResult(
+	 string Hall,
+	 string Category,
+	 string Rowid,
+	 string Round,
+	 string CasinoAccount,
+	 decimal Betvalid,
+	 decimal BetAmount,
+	 decimal Betresult,
+	 decimal PcaContribute,
+	 decimal PcaWin,
+	 decimal Revenue,
+	 DateTimeOffset Bettime,
+	 DateTimeOffset PayoutTime,
+	 DateTimeOffset Reporttime,
+	 BetLogStatus Status,
+	 string GameId,
+	 bool Trace,
+	 int Freegame,
+	 string AdditionalData);
