@@ -231,7 +231,7 @@ deploy-prod:
         "nodeSelector": $node_selector,
         "tolerations": [$dedicated],
         "resources": $resources,
-        "replicaCount": 1
+        "replicaCount": 2
       }
       EOF
     - |
@@ -244,6 +244,6 @@ deploy-prod:
         "nodeSelector": $node_selector,
         "tolerations": [$dedicated],
         "resources": $resources,
-        "replicaCount": 1
+        "replicaCount": 2
       }
       EOF
