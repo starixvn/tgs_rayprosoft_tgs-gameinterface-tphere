@@ -13,10 +13,6 @@
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
 		<NoWarn>$(NoWarn);1591;0063</NoWarn>
 	</PropertyGroup>
-	
-	<ItemGroup>
-	  <None Remove="Protos\GameInterfaceTPhere.proto" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="FluentdForward.OpenTelemetry.MessagePack" Version="0.3.8" />
@@ -39,10 +35,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Tgs.GameInterface.TPhere.Core\Tgs.GameInterface.TPhere.Core.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Protobuf Include="Protos\GameInterfaceTPhere.proto" />
+		<ProjectReference Include="..\Tgs.GameInterface.TPhere.Protos\Tgs.GameInterface.TPhere.Protos.csproj" />
 	</ItemGroup>
 
 </Project>

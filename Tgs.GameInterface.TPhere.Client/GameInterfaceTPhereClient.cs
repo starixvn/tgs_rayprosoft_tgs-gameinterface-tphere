@@ -3,6 +3,7 @@ using Google.Protobuf.WellKnownTypes;
 using Tgs.GameInterface.TPhere.Protos;
 
 namespace Tgs.GameInterface.TPhere.Client;
+
 internal class GameInterfaceTPhereClient(
 	GameInterfaceTPhere.GameInterfaceTPhereClient client) : IGameInterfaceTPhereClient
 {
@@ -20,6 +21,7 @@ internal class GameInterfaceTPhereClient(
 
 		return reply.MachineName;
 	}
+
 	public async ValueTask<bool> FundStatusAsync(Uri apiUrl, string apiKey, string apiToken, string orderId, CancellationToken cancellationToken = default)
 	{
 		var request = new FundStatusRequest
@@ -37,6 +39,7 @@ internal class GameInterfaceTPhereClient(
 
 		return reply.State;
 	}
+
 	public async ValueTask<FundReply> TP2FundInAsync(Uri apiUrl, string apiKey, string apiToken, string playerCode, string orderId, decimal amount, CancellationToken cancellationToken = default)
 	{
 		var request = new FundRequest
@@ -62,6 +65,7 @@ internal class GameInterfaceTPhereClient(
 			Res = reply.Res,
 		};
 	}
+
 	public async ValueTask<FundReply> TP2FundOutAsync(Uri apiUrl, string apiKey, string apiToken, string playerCode, string orderId, decimal amount, CancellationToken cancellationToken = default)
 	{
 		var request = new FundRequest
@@ -87,6 +91,7 @@ internal class GameInterfaceTPhereClient(
 			Res = reply.Res,
 		};
 	}
+
 	public async ValueTask<GameUrlReply> TP2GameUrlAsync(Uri apiUrl, string apiKey, string apiToken, string playerCode, string gameCode, bool isMobile, string language, CancellationToken cancellationToken = default)
 	{
 		var request = new GameUrlRequest
@@ -111,6 +116,7 @@ internal class GameInterfaceTPhereClient(
 			GameUrl = reply.GameUrl
 		};
 	}
+
 	public async IAsyncEnumerable<GameWagerInfo> TP2GameWagerBetLogAsync(Uri apiUrl, string apiKey, string apiToken, DateTimeOffset startTime, DateTimeOffset endTime, int page, int pageSize, [EnumeratorCancellation] CancellationToken cancellationToken = default)
 	{
 		var request = new GameWagerRequest
@@ -141,6 +147,7 @@ internal class GameInterfaceTPhereClient(
 			yield return item;
 		}
 	}
+
 	public async IAsyncEnumerable<GameWagerInfo> TP2GameWagerBetLogByBettimeAsync(Uri apiUrl, string apiKey, string apiToken, DateTimeOffset startTime, DateTimeOffset endTime, int page, int pageSize, [EnumeratorCancellation] CancellationToken cancellationToken = default)
 	{
 		var request = new GameWagerRequest
@@ -171,6 +178,7 @@ internal class GameInterfaceTPhereClient(
 			yield return item;
 		}
 	}
+
 	public async ValueTask<string> TP2GameWagerDetailAsync(Uri apiUrl, string apiKey, string apiToken, string externalWagerId, DateTimeOffset externalCreatedOn, string language, CancellationToken cancellationToken = default)
 	{
 		var request = new GameWagerDetailRequest
@@ -190,6 +198,7 @@ internal class GameInterfaceTPhereClient(
 
 		return reply.GameWagerDetailUrl;
 	}
+
 	public async ValueTask<PlayerBalanceReply> TP2PlayerBalanceAsync(Uri apiUrl, string apiKey, string apiToken, string playerCode, CancellationToken cancellationToken = default)
 	{
 		var request = new PlayerBalanceRequest
@@ -211,6 +220,7 @@ internal class GameInterfaceTPhereClient(
 			Balance = reply.Balance
 		};
 	}
+
 	public async ValueTask TP2PlayerCreateAsync(Uri apiUrl, string apiKey, string apiToken, string playerCode, CancellationToken cancellationToken = default)
 	{
 		var request = new PlayerCreateRequest
@@ -226,6 +236,7 @@ internal class GameInterfaceTPhereClient(
 		   cancellationToken: cancellationToken)
 		   .ConfigureAwait(false);
 	}
+
 	public async ValueTask TP2PlayerLogoutAsync(Uri apiUrl, string apiKey, string apiToken, string playerCode, CancellationToken cancellationToken = default)
 	{
 		var request = new PlayerLogoutRequest

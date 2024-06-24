@@ -27,6 +27,8 @@ public class BetLogByBettimeUnitTest
 
 		var policySettingsOptions = Options.Create(new PolicySettingsOptions
 		{
+			GlobalRetryCount = 1,
+			GlobalRetryWaitSec = 1,
 			DepositRetryCount = 1,
 			DepositRetryWaitSec = 1,
 			WithdrawRetryCount = 1,
@@ -164,6 +166,8 @@ public class BetLogByBettimeUnitTest
 
 		var policySettingsOptions = Options.Create(new PolicySettingsOptions
 		{
+			GlobalRetryCount = 1,
+			GlobalRetryWaitSec = 1,
 			DepositRetryCount = 1,
 			DepositRetryWaitSec = 1,
 			WithdrawRetryCount = 1,
@@ -301,6 +305,8 @@ public class BetLogByBettimeUnitTest
 
 		var policySettingsOptions = Options.Create(new PolicySettingsOptions
 		{
+			GlobalRetryCount = 1,
+			GlobalRetryWaitSec = 1,
 			DepositRetryCount = 1,
 			DepositRetryWaitSec = 1,
 			WithdrawRetryCount = 1,
@@ -442,6 +448,8 @@ public class BetLogByBettimeUnitTest
 
 		var policySettingsOptions = Options.Create(new PolicySettingsOptions
 		{
+			GlobalRetryCount = 1,
+			GlobalRetryWaitSec = 1,
 			DepositRetryCount = 1,
 			DepositRetryWaitSec = 1,
 			WithdrawRetryCount = 1,
@@ -583,6 +591,8 @@ public class BetLogByBettimeUnitTest
 
 		var policySettingsOptions = Options.Create(new PolicySettingsOptions
 		{
+			GlobalRetryCount = 1,
+			GlobalRetryWaitSec = 1,
 			DepositRetryCount = 1,
 			DepositRetryWaitSec = 1,
 			WithdrawRetryCount = 1,
@@ -720,6 +730,8 @@ public class BetLogByBettimeUnitTest
 
 		var policySettingsOptions = Options.Create(new PolicySettingsOptions
 		{
+			GlobalRetryCount = 1,
+			GlobalRetryWaitSec = 1,
 			DepositRetryCount = 1,
 			DepositRetryWaitSec = 1,
 			WithdrawRetryCount = 1,
@@ -841,5 +853,138 @@ public class BetLogByBettimeUnitTest
 		Assert.False(actual.FirstOrDefault()!.Trace);
 		Assert.Equal(0, actual.FirstOrDefault()!.Freegame);
 		Assert.Equal(response["data"]!["page_result"]!.AsArray().FirstOrDefault()!.ToJsonString(), actual.FirstOrDefault()!.AdditionalData);
+	}
+
+	[Fact]
+	public async Task Policy()
+	{
+		var apiUrl = new Uri("https://apidemo.tphere.com");
+		var apiKey = "6309572cf90658e17847a7b021723106";
+		var apiToken = "29dad28e8ab9c9855e6aa4b9a9e4a869325931d4976dfcf53266ccbe0c5f3387ea48258c002e3543edbb35f63caa5cacc65ac5c664ccfe0619e1d63018a87dbb";
+		var gamehall = "tp2";
+		var startTime = new DateTimeOffset(2024, 04, 10, 14, 13, 00, TimeSpan.FromHours(8));
+		var endTime = new DateTimeOffset(2024, 04, 10, 14, 14, 00, TimeSpan.FromHours(8));
+		var page = 1;
+		var pageSize = 5000;
+
+		var policySettingsOptions = Options.Create(new PolicySettingsOptions
+		{
+			GlobalRetryCount = 1,
+			GlobalRetryWaitSec = 1,
+			DepositRetryCount = 1,
+			DepositRetryWaitSec = 1,
+			WithdrawRetryCount = 1,
+			WithdrawRetryWaitSec = 1
+		});
+		var fakeLog = NullLogger<GameApiClient>.Instance;
+		var fakeCryptographyUtensil = Substitute.For<ICryptographyUtensil>();
+
+		var parameters = new SortedDictionary<string, string>
+		{
+			{ "gamehall", gamehall },
+			{ "start_time", TimeZoneInfo.ConvertTime(startTime.DateTime,_timeZone).ToString("yyyy-MM-dd HH:mm:ss")},
+			{ "end_time", TimeZoneInfo.ConvertTime(endTime.DateTime, _timeZone).ToString("yyyy-MM-dd HH:mm:ss")},
+			{ "page", page.ToString() },
+			{ "page_size", pageSize.ToString() }
+		};
+
+		var sign = "025adfa52c0078138a7046e8fe9893a9";
+		_ = fakeCryptographyUtensil.Md5Encrypt(
+			source: Arg.Any<string>())
+			.Returns(sign);
+
+		var builder = new UriBuilder(new Uri(apiUrl, "/api/betlog-by-bettime"));
+		var query = HttpUtility.ParseQueryString(builder.Query);
+		foreach (var parameter in parameters)
+		{
+			query[parameter.Key] = parameter.Value;
+		}
+
+		query["sign"] = sign;
+		builder.Query = query.ToString();
+		var response = new JsonObject
+		{
+			["data"] = new JsonObject
+			{
+				["page_result"] = new JsonArray
+				{
+					new JsonObject
+					{
+						["hall"]= "gpk2",
+						["category"]= "live",
+						["rowid"]= "70281207668500004",
+						["casino_account"]= "4umv37wchzks",
+						["game_name"]= "Lucky Wheel",
+						["betvalid"]= "0",
+						["betamount"]= "1",
+						["betresult"]= "0",
+						["bettime"]= "2024-06-12 02:38:01",
+						["payout_time"]= null,
+						["reporttime"]= "2024-06-12 02:42:35",
+						["status"]= "0",
+						["gameid"]= "ga_tP",
+						["round"]= "840aa001240612143756tP001134352luckyRoulette",
+						["freegame"]= null,
+						["pca_contribute"]= "0",
+						["pca_win"]= "0",
+						["revenue"]= "0",
+						["trace"]= false,
+						["bettype"]= null,
+						["gameresult"]= null,
+						["betinfo"]= null
+					}
+				},
+				["current_page"] = 1,
+				["from"] = 1,
+				["to"] = 2,
+				["per_page"] = 5000,
+				["last_page"] = 1,
+				["total"] = 2
+			},
+			["status"] = new JsonObject
+			{
+				["code"] = 0,
+				["message"] = "success",
+				["timestamp"] = 1712730364
+			}
+		};
+		var handler = new MockHttpMessageHandler();
+		_ = handler.Expect(HttpMethod.Get, "/api/betlog-by-bettime")
+				.WithHeaders("Authorization", apiToken)
+				.Respond(HttpStatusCode.OK, JsonContent.Create(new JsonObject
+				{
+					["data"] = null,
+					["status"] = new JsonObject
+					{
+						["code"] = 7,
+						["message"] = "Exceed api call limit.",
+						["timestamp"] = 1719216902
+					}
+				}));
+		_ = handler.Expect(HttpMethod.Get, "/api/betlog-by-bettime")
+				.WithHeaders("Authorization", apiToken)
+				.Respond(HttpStatusCode.OK, JsonContent.Create(response));
+
+		var fakeHttpClient = handler.ToHttpClient();
+
+		var sut = new GameApiClient(
+			fakeLog,
+			policySettingsOptions,
+			fakeCryptographyUtensil,
+			fakeHttpClient);
+
+		var actual = await sut.BetLogByBettimeAsync(
+			 apiUrl: apiUrl,
+			 apiKey: apiKey,
+			 apiToken: apiToken,
+			 gamehall: gamehall,
+			 startTime: startTime,
+			 endTime: endTime,
+			 page: page,
+			 pageSize: pageSize)
+			.ToArrayAsync();
+
+		Assert.NotNull(actual);
+		Assert.NotNull(actual.FirstOrDefault()!);
 	}
 }
