@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tgs.GameInterface.TPhere.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tgs.GameInterface.TPhere.Core.UnitTest", "Tgs.GameInterface.TPhere.Core.UnitTest\Tgs.GameInterface.TPhere.Core.UnitTest.csproj", "{1D7AF1B2-B3CF-4D6A-834F-18E5D897BB37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tgs.GameInterface.TPhere.Client", "Tgs.GameInterface.TPhere.Client\Tgs.GameInterface.TPhere.Client.csproj", "{967AB6DC-F7D1-4501-A935-EE5B6BF48900}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tgs.GameInterface.TPhere.Client", "Tgs.GameInterface.TPhere.Client\Tgs.GameInterface.TPhere.Client.csproj", "{967AB6DC-F7D1-4501-A935-EE5B6BF48900}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tgs.GameInterface.TPhere.Protos", "Tgs.GameInterface.TPhere.Protos\Tgs.GameInterface.TPhere.Protos.csproj", "{B8051334-2B13-42D0-9DB7-076A771F3CBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{967AB6DC-F7D1-4501-A935-EE5B6BF48900}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{967AB6DC-F7D1-4501-A935-EE5B6BF48900}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{967AB6DC-F7D1-4501-A935-EE5B6BF48900}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8051334-2B13-42D0-9DB7-076A771F3CBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8051334-2B13-42D0-9DB7-076A771F3CBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8051334-2B13-42D0-9DB7-076A771F3CBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8051334-2B13-42D0-9DB7-076A771F3CBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

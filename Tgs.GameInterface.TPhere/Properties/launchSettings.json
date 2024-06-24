@@ -16,7 +16,12 @@
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:5005",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "OTEL_SERVICE_NAME": "Game-GameInterface-TP(local)",
+        "NODE_IP": "otel.rpgp.cc",
+        "RELEASE_NAMESPACE": "dev",
+        "POD_IP": "127.0.0.1"
+
       }
     },
     "https": {
@@ -26,15 +31,12 @@
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7125;http://localhost:5005",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "OTEL_SERVICE_NAME": "Game-GameInterface-TP(local)",
+        "NODE_IP": "otel.rpgp.cc",
+        "RELEASE_NAMESPACE": "dev",
+        "POD_IP": "127.0.0.1"
+
       }
     }
   }

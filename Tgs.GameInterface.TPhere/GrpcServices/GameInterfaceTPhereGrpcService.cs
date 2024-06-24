@@ -29,6 +29,7 @@ public class GameInterfaceTPhereGrpcService(
 			MachineName = Environment.MachineName
 		});
 	}
+
 	public override async Task<BaseReply> FundStatus(FundStatusRequest request, ServerCallContext context)
 	{
 		var query = new FundStatusQuery(
@@ -47,6 +48,7 @@ public class GameInterfaceTPhereGrpcService(
 			State = result
 		};
 	}
+
 	public override async Task<FundReply> TP2FundIn(FundRequest request, ServerCallContext context)
 	{
 		var query = new TP2FundInQuery(
@@ -70,6 +72,7 @@ public class GameInterfaceTPhereGrpcService(
 			Res = result.Res
 		};
 	}
+
 	public override async Task<FundReply> TP2FundOut(FundRequest request, ServerCallContext context)
 	{
 		var query = new TP2FundOutQuery(
@@ -93,6 +96,7 @@ public class GameInterfaceTPhereGrpcService(
 			Res = result.Res
 		};
 	}
+
 	public override async Task<GameUrlReply> TP2GameUrl(GameUrlRequest request, ServerCallContext context)
 	{
 		var query = new TP2GameUrlQuery(
@@ -115,6 +119,7 @@ public class GameInterfaceTPhereGrpcService(
 			GameUrl = result.GameUrl
 		};
 	}
+
 	public override async Task<GameWagerReply> TP2GameWagerBetLog(GameWagerRequest request, ServerCallContext context)
 	{
 		var query = new TP2GameWagerBetLogQuery(
@@ -160,6 +165,7 @@ public class GameInterfaceTPhereGrpcService(
 
 		return result;
 	}
+
 	public override async Task<GameWagerReply> TP2GameWagerBetLogByBettime(GameWagerRequest request, ServerCallContext context)
 	{
 		var query = new TP2GameWagerBetLogByBettimeQuery(
@@ -205,6 +211,7 @@ public class GameInterfaceTPhereGrpcService(
 
 		return result;
 	}
+
 	public override async Task<GameWagerDetailReply> TP2GameWagerDetail(GameWagerDetailRequest request, ServerCallContext context)
 	{
 		var query = new TP2GameWagerDetailQuery(
@@ -225,6 +232,7 @@ public class GameInterfaceTPhereGrpcService(
 			GameWagerDetailUrl = result
 		};
 	}
+
 	public override async Task<PlayerBalanceReply> TP2PlayerBalance(PlayerBalanceRequest request, ServerCallContext context)
 	{
 		var query = new TP2PlayerBalanceQuery(
@@ -244,6 +252,7 @@ public class GameInterfaceTPhereGrpcService(
 			Balance = result.Balance
 		};
 	}
+
 	public override async Task<BaseReply> TP2PlayerCreate(PlayerCreateRequest request, ServerCallContext context)
 	{
 		var command = new TP2PlayerCreateCommand(
@@ -262,6 +271,7 @@ public class GameInterfaceTPhereGrpcService(
 			State = true
 		};
 	}
+
 	public override async Task<BaseReply> TP2PlayerLogout(PlayerLogoutRequest request, ServerCallContext context)
 	{
 		var command = new TP2PlayerLogoutCommand(

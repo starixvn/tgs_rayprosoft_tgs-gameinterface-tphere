@@ -12,7 +12,8 @@ WORKDIR /src
 COPY ["nuget.config", "."]
 COPY ["Tgs.GameInterface.TPhere/Tgs.GameInterface.TPhere.csproj", "Tgs.GameInterface.TPhere/"]
 COPY ["Tgs.GameInterface.TPhere.Core/Tgs.GameInterface.TPhere.Core.csproj", "Tgs.GameInterface.TPhere.Core/"]
-RUN dotnet restore "./Tgs.GameInterface.TPhere/./Tgs.GameInterface.TPhere.csproj"
+COPY ["Tgs.GameInterface.TPhere.Protos/Tgs.GameInterface.TPhere.Protos.csproj", "Tgs.GameInterface.TPhere.Protos/"]
+RUN dotnet restore "./Tgs.GameInterface.TPhere/Tgs.GameInterface.TPhere.csproj"
 COPY . .
 WORKDIR "/src/Tgs.GameInterface.TPhere"
 RUN dotnet build "./Tgs.GameInterface.TPhere.csproj" -c $BUILD_CONFIGURATION -o /app/build
