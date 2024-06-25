@@ -22,6 +22,8 @@ public interface IGameInterfaceTPhereClient
 
 	ValueTask<PlayerBalanceReply> TP2PlayerBalanceAsync(Uri apiUrl, string apiKey, string apiToken, string playerCode, CancellationToken cancellationToken = default);
 
+	ValueTask<bool> TP2PlayerOnlineAsync(Uri apiUrl, string apiKey, string apiToken, string playerCode, CancellationToken cancellationToken = default);
+
 	ValueTask TP2PlayerCreateAsync(Uri apiUrl, string apiKey, string apiToken, string playerCode, CancellationToken cancellationToken = default);
 
 	ValueTask TP2PlayerLogoutAsync(Uri apiUrl, string apiKey, string apiToken, string playerCode, CancellationToken cancellationToken = default);

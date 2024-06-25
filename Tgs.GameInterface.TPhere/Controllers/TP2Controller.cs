@@ -364,6 +364,40 @@ public class TP2Controller : ControllerBase
 	}
 
 	/// <summary>
+	/// Players the online asynchronous.
+	/// </summary>
+	/// <param name="service">The service.</param>
+	/// <param name="source">The source.</param>
+	/// <returns></returns>
+	/// <remarks>
+	/// <b>Example</b><br />
+	///
+	///     Post
+	///
+	///			{
+	///				"apiUrl": "https://apidemo.tphere.com/",
+	///				"apiKey": "6309572cf90658e17847a7b021723106",
+	///				"apiToken": "29dad28e8ab9c9855e6aa4b9a9e4a869325931d4976dfcf53266ccbe0c5f3387ea48258c002e3543edbb35f63caa5cacc65ac5c664ccfe0619e1d63018a87dbb",
+	///				"playerCode": "4ucmqplxb029"
+	///			}
+	/// </remarks>
+	[HttpPost("player/Online", Name = "TP2_PlayerOnline")]
+	public ValueTask<bool> PlayerOnlineAsync(
+		[FromServices] IGetService<TP2PlayerOnlineQuery, bool> service,
+		TP2PlayerOnlineQuery source)
+	{
+		var query = new TP2PlayerOnlineQuery(
+			ApiUrl: source.ApiUrl,
+			ApiKey: source.ApiKey,
+			ApiToken: source.ApiToken,
+			PlayerCode: source.PlayerCode);
+
+		return service.GetAsync(
+			query: query,
+			cancellationToken: HttpContext.RequestAborted);
+	}
+
+	/// <summary>
 	/// Players the create asynchronous.
 	/// </summary>
 	/// <param name="service">The service.</param>

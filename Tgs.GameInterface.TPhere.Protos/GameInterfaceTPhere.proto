@@ -13,6 +13,7 @@ service GameInterfaceTPhere {
   rpc TP2PlayerBalance (PlayerBalanceRequest) returns (PlayerBalanceReply);
   rpc TP2PlayerCreate (PlayerCreateRequest) returns (BaseReply);
   rpc TP2PlayerLogout (PlayerLogoutRequest) returns (BaseReply);
+  rpc TP2PlayerOnline (PlayerOnlineRequest) returns (PlayerOnlineReply);
   rpc TP2FundIn (FundRequest) returns (FundReply);
   rpc TP2FundOut (FundRequest) returns (FundReply);
   rpc FundStatus(FundStatusRequest) returns (BaseReply);
@@ -33,6 +34,13 @@ message PlayerBalanceRequest {
 }
 
 message PlayerCreateRequest {
+	string api_url = 1;
+	string api_key = 2;
+	string api_token = 3;
+	string player_code = 4;
+}
+
+message PlayerOnlineRequest {
 	string api_url = 1;
 	string api_key = 2;
 	string api_token = 3;
@@ -103,6 +111,10 @@ message BaseReply {
 message PlayerBalanceReply {
 	bool is_player_exist = 1;
 	phoenix.protobuf.DecimalValue balance = 2;
+}
+
+message PlayerOnlineReply {
+	bool online = 1;
 }
 
 message FundReply {
