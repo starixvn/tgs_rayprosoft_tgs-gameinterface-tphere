@@ -252,4 +252,22 @@ internal class GameInterfaceTPhereClient(
 		   cancellationToken: cancellationToken)
 		   .ConfigureAwait(false);
 	}
+
+	public async ValueTask<bool> TP2PlayerOnlineAsync(Uri apiUrl, string apiKey, string apiToken, string playerCode, CancellationToken cancellationToken = default)
+	{
+		var request = new PlayerOnlineRequest
+		{
+			ApiUrl = apiUrl.ToString(),
+			ApiKey = apiKey,
+			ApiToken = apiToken,
+			PlayerCode = playerCode
+		};
+
+		var reply = await client.TP2PlayerOnlineAsync(
+			request: request,
+			cancellationToken: cancellationToken)
+			.ConfigureAwait(false);
+
+		return reply.Online;
+	}
 }

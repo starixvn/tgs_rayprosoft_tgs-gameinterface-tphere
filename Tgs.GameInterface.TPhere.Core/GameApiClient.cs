@@ -521,6 +521,41 @@ internal class GameApiClient(
 				Res: jsonNode["data"]!.ToJsonString());
 	}
 
+	public async ValueTask<bool> PlayerIsGamingAsync(Uri apiUrl, string apiKey, string apiToken, string gamehall, string account, CancellationToken cancellationToken = default)
+	{
+		var retryPolicy = Policy.HandleResult<JsonNode>(jsonNode => jsonNode["status"]?["code"]?.GetValue<int>() == 7)
+			.WaitAndRetryAsync(
+				retryCount: _policySettingsOptions.GlobalRetryCount,
+				retryAttempt => TimeSpan.FromSeconds(Math.Pow(_policySettingsOptions.GlobalRetryWaitSec, retryAttempt)),
+				onRetry: (response, retryTime, context) => logger.LogWarning("{logWarningInfo}",
+						new
+						{
+							LogOn = DateTime.Now.ToString("o"),
+							LogPrefix = nameof(PlayerIsGamingAsync),
+							Message = "Exceed api call limit.",
+							Resp = response.ToString()
+						}));
+
+		var jsonNode = await retryPolicy.ExecuteAsync(
+			() => GetAsync(
+				apiUrl: new Uri(apiUrl, "/api/player/is-gaming"),
+				apiKey: apiKey,
+				apiToken: apiToken,
+				parameters: new SortedDictionary<string, string>
+				{
+					{ "account",account },
+					{ "gamehall", gamehall }
+				},
+				logPrefix: nameof(PlayerIsGamingAsync),
+				cancellationToken: cancellationToken)
+			.AsTask())
+			.ConfigureAwait(false);
+
+		return jsonNode["status"]?["code"]?.GetValue<int>() != 0
+			? throw new ErrorCodeException(jsonNode["status"]!["code"]!.GetValue<int>())
+			: jsonNode["data"]!["is_gaming"]!.GetValue<bool>();
+	}
+
 	private async ValueTask<JsonNode> GetTransactionAsync(Uri apiUrl, string apiKey, string apiToken, string logPrefix, CancellationToken cancellationToken = default)
 	{
 		var sign = cryptographyUtensil.Md5Encrypt(apiKey);

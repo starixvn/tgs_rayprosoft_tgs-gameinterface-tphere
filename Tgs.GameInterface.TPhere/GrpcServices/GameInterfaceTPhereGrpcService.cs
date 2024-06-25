@@ -17,6 +17,7 @@ public class GameInterfaceTPhereGrpcService(
 	IQueryService<TP2GameWagerBetLogQuery, GameWagerResult> tp2GameWagerBetLogService,
 	IGetService<TP2GameWagerDetailQuery, string> tp2GameWagerDetailService,
 	IGetService<TP2PlayerBalanceQuery, PlayerBalanceResult> tp2PlayerBalanceService,
+	IGetService<TP2PlayerOnlineQuery, bool> tp2PlayerOnlineService,
 	ICommandService<TP2PlayerCreateCommand> tp2PlayerCreateService,
 	ICommandService<TP2PlayerLogoutCommand> tp2PlayerLogoutService) : GameInterfaceTPhere.GameInterfaceTPhereBase
 {
@@ -288,6 +289,25 @@ public class GameInterfaceTPhereGrpcService(
 		return new BaseReply()
 		{
 			State = true
+		};
+	}
+
+	public override async Task<PlayerOnlineReply> TP2PlayerOnline(PlayerOnlineRequest request, ServerCallContext context)
+	{
+		var query = new TP2PlayerOnlineQuery(
+			ApiUrl: new Uri(request.ApiUrl),
+			ApiKey: request.ApiKey,
+			ApiToken: request.ApiToken,
+			PlayerCode: request.PlayerCode);
+
+		var result = await tp2PlayerOnlineService.GetAsync(
+			query: query,
+			cancellationToken: context.CancellationToken)
+			.ConfigureAwait(false);
+
+		return new PlayerOnlineReply()
+		{
+			Online = result
 		};
 	}
 }

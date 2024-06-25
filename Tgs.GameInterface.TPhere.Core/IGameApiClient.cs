@@ -8,6 +8,8 @@ public interface IGameApiClient
 
 	ValueTask<PlayerWalletResult> PlayerWalletAsync(Uri apiUrl, string apiKey, string apiToken, string gamehall, string account, CancellationToken cancellationToken = default);
 
+	ValueTask<bool> PlayerIsGamingAsync(Uri apiUrl, string apiKey, string apiToken, string gamehall, string account, CancellationToken cancellationToken = default);
+
 	ValueTask PlayerLogoutAsync(Uri apiUrl, string apiKey, string apiToken, string gamehall, string account, CancellationToken cancellationToken = default);
 
 	ValueTask<TransactionResult> TransactionWithdrawAsync(Uri apiUrl, string apiKey, string apiToken, string gamehall, string account, string transactionId, decimal amount, CancellationToken cancellationToken = default);
